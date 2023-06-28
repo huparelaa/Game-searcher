@@ -1,20 +1,10 @@
 .page{
   background-color: #683f6d;
-  width: 100%;
-  height: 100%;
 }
-
 .header {
   display: flex;
   flex-direction: column;
   text-align: center;
-}
-.button-group{
-  display: flex;
-  flex-wrap: wrap;
-}
-.button-group button{
-  flex-grow: 1;
 }
 .error{
   font: bold;
@@ -22,7 +12,10 @@
 }
 button{
   border: none;
+  border-radius: 10px;
   margin: 10px;
+  width: 100px;
+  height: 50px;
   color: #EDFBC1;
   background-color: #225560;
 }
@@ -32,4 +25,8 @@ button:hover{
 }
 input{
   outline: none;
+  width: 80%;
+  height: 50px;
+  border-radius: 10px;
+  font-size: 1.2em;
 }

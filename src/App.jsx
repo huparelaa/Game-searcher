@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./App.css";
 import { useSearch } from "./hooks/useSearch";
-import { Games } from "./components/Games";
+import { Games } from "./components/games/Games";
 import { API_URL } from "./utils/api";
 function App() {
   const [games, setGames] = useState(null);
@@ -44,15 +44,15 @@ function App() {
   return (
     <div className="page">
       <header className="header">
-        <h1 style={{ color: "white" }}>Game searcher</h1>
+        <h1 style={{ color: "white" }}>Buscador de juegos</h1>
         <form onSubmit={handleSubmit}>
           <input
             placeholder="Hades, Undertale..."
             onChange={(event) => updateSearch(event.target.value)}
-          maxLength={255}
+            maxLength={255}
           />
           <p className="error">{error}</p>
-          <button type="submit">Search</button>
+          <button type="submit">Buscar</button>
         </form>
       </header>
 
