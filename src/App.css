@@ -8,7 +8,7 @@
 }
 .error{
   font: bold;
-  color:rgb(255, 30, 30);
+  color:rgb(255, 115, 0);
 }
 button{
   border: none;
@@ -29,4 +29,8 @@ input{
   height: 50px;
   border-radius: 10px;
   font-size: 1.2em;
+}
+.warning{
+  text-align: center;
+  color: #fff;
 }

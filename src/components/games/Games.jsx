@@ -1,5 +1,5 @@
 import "./games.css";
-function ListOfGames({ games }) {
+export function Games({ games }) {
   return (
     <>
       <div className="games-container">
@@ -7,8 +7,7 @@ function ListOfGames({ games }) {
           <div key={game.id} className="game-card">
             <p className="title">{game.name}</p>
             <div className="img-container">
-              {game.image ?  <img src="https://avatars.githubusercontent.com/u/81880485?s=400&u=494eceef3d916066283f1f9e3643f1fceaa2c843&v=4"/>: <img src={game.background_image} alt={game.name}/>}
-              
+              <img src={game.background_image} alt={game.name} />
             </div>
             <p
               className="rating"
@@ -30,13 +29,4 @@ function ListOfGames({ games }) {
       </div>
     </>
   );
-}
-
-function NoGameFound() {
-  return <h1 className="no-game-found">No encontramos juegos con la información proporcionada :(</h1>;
-}
-
-export function Games({ games }) {
-  const hasGames = games?.length > 0;
-  return hasGames ? <ListOfGames games={games} /> : <NoGameFound />;
 }

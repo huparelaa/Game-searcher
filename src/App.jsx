@@ -2,52 +2,25 @@ import React, { useState, useEffect, useRef } from "react";
 import "./App.css";
 import { useSearch } from "./hooks/useSearch";
 import { Games } from "./components/games/Games";
-import { API_URL } from "./utils/api";
+import { SearchGames } from "./services/searchGames";
 function App() {
-  const [games, setGames] = useState(null);
-  const [page, setPage] = useState(1);
-  const [searchGames, setSearch] = useState("");
-  useEffect(() => {
-    fetch(`${API_URL}&search=${search}&page=${page}`)
-      .then((res) => res.json())
-      .then((res) => {
-        if (games) {
-          setGames([...games, ...res.results]);
-        } else {
-          setGames(res.results);
-        }
-      });
-  }, [searchGames, page]);
-
   const { search, updateSearch, error } = useSearch();
+  const { games, setGames, setSearchGames, isLoading } = SearchGames();
 
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!error) {
-      setSearch(search);
       setGames([]);
+      setSearchGames(search);
     }
   };
-  useEffect(() => {
-    const handleScroll = (e) => {
-      const scrollHeight = e.target.documentElement.scrollHeight;
-      const currentHeight = window.innerHeight + window.scrollY;
-      if (currentHeight >= scrollHeight) {
-        setPage(page + 1);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [page]);
-
   return (
-    <div className="page">
+    <div className="page" style={{ height: games?.length < 1 ? "100vh" : "" }}>
       <header className="header">
         <h1 style={{ color: "white" }}>Buscador de juegos</h1>
         <form onSubmit={handleSubmit}>
           <input
-            placeholder="Hades, Undertale..."
+            placeholder="The Witcher"
             onChange={(event) => updateSearch(event.target.value)}
             maxLength={255}
           />
@@ -57,14 +30,12 @@ function App() {
       </header>
 
       <main>
-        {games ? (
-          <>
-            <Games games={games} />
-          </>
+        {games?.length > 0 ? (
+          <Games games={games} />
+        ) : isLoading ? (
+          <h1 className="warning">Buscando juegos</h1>
         ) : (
-          <p style={{ textAlign: "center", height: "100vh", color: "#fff" }}>
-            Cargando juegos...
-          </p>
+          <h1 className="warning">No se encontraron juegos</h1>
         )}
       </main>
     </div>
