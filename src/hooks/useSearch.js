@@ -6,6 +6,10 @@ export function useSearch() {
   const isFirstInput = useRef(true);
 
   useEffect(() => {
+    if (search.length < 3 && search.length > 0) {
+      setError("Ese nombre parece ser un poco corto");
+      return;
+    }
     if (isFirstInput.current) {
       isFirstInput.current = search === "";
       return;
@@ -20,10 +24,7 @@ export function useSearch() {
       setError("La mayoría de los juegos inician con una letra");
       return;
     }
-    if (search.length < 3) {
-      setError("Ese nombre parece ser un poco corto");
-      return;
-    }
+
     setError(null);
   }, [search]);
 
